@@ -6,7 +6,7 @@ This prompt is a specialisation of repository called "Informative git prompt for
 
 A `zsh` prompt that displays information about the current git repository. In particular the branch name, difference with remote branch, number of files staged, changed, etc.
 
-<img src="https://github.com/olivierverdier/zsh-git-prompt/raw/master/screenshot.png" width=300/>
+<img src="https://github.com/Green0wl/zsh-git-kali-prompt/raw/master/screenshot.png" width=300/>
 
 ## Designations
 You can find all the repository state designations in the `zshrc.sh` file by copying the repository. Here they are:
