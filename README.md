@@ -33,7 +33,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{-%G%}"
 
     ```sh
     # zsh git prompt setup.
-    source $HOME/zsh-git-prompt/zshrc.sh
+    source $HOME/zsh-git-kali-prompt/zshrc.sh
     prompt_symbol=㉿
     git_prompt_injection_string='$(git_super_status)'
 
