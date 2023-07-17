@@ -46,34 +46,22 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{-%G%}"
     ```
 3.  Go in a git repository and test it! This only works if you are in a repository.
 
+This functionality of working only in a directory with initialised git is done by using the appropriate division at the end of the `git_super_status` function in the `zshrc.sh` file:
+
 ```bash
-	  # if there is name of branch in current directory.
-	  # I mean this name is not ":".
-	  if [ "${STATUS:24:1}" = ":" ]; then
-		echo ""
-	  else
-		echo "$STATUS"
-	  fi
+# if there is name of branch in current directory.
+# I mean this name is not ":".
+if [ "${STATUS:24:1}" = ":" ]; then
+  echo ""
+else
+  echo "$STATUS"
+fi
 ```
 
-### Haskell (optional)
-
-There is now a Haskell implementation as well, which can be four to six times faster than the Python one. The reason is not that Haskell is faster in itself (although it is), but that this implementation calls `git` only once. To install, do the following:
-
-1.  Make sure [Haskell's stack](http://docs.haskellstack.org/en/stable/README.html#how-to-install) is installed on your system
-2.  `cd` to this folder
-2.  Run `stack setup` to install the Haskell compiler, if it is not already there
-3.  Run `stack build && stack install` (don't worry, the executable is only “installed” in this folder, not on your system)
-4.  Define the variable `GIT_PROMPT_EXECUTABLE="haskell"` somewhere in
-    your `.zshrc`
+The slice that occurs on git status only works on the slice set in the code. Accordingly, you will have to update it if you make any changes to the appearance of the git prompt.
 
 ## Customisation
 
 - You may redefine the function `git_super_status` (after the `source` statement) to adapt it to your needs (to change the order in which the information is displayed).
 - Define the variable `ZSH_THEME_GIT_PROMPT_CACHE` in order to enable caching.
 - You may also change a number of variables (which name start with `ZSH_THEME_GIT_PROMPT_`) to change the appearance of the prompt.  Take a look in the file `zshrc.sh` to see how the function `git_super_status` is defined, and what variables are available.
-
-**Enjoy!**
-
-  [blog post]: http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
-  
