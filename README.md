@@ -9,21 +9,7 @@ A `zsh` prompt that displays information about the current git repository. In pa
 <img src="https://raw.githubusercontent.com/Green0wl/zsh-git-kali-prompt/main/screenshot.png" width="auto"/>
 
 ## Designations
-You can find all the repository state designations in the `zshrc.sh` file by copying the repository. Here they are:
-```
-# Default values for the appearance of the prompt. Configure at will.
-ZSH_THEME_GIT_PROMPT_PREFIX="-["
-ZSH_THEME_GIT_PROMPT_SUFFIX="%F{%(#.blue.green)}]"
-ZSH_THEME_GIT_PROMPT_SEPARATOR="%b\e[0m%B\e[38;2;247;174;248m:\e[0m" 				# \e[0;37;1m \e[1m (old)
-ZSH_THEME_GIT_PROMPT_BRANCH="%B\e[38;2;247;174;248m" 						# \e[38;5;216;1m (old)
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{+%G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{!%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{*%G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{<%G%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{>%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{?%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{-%G%}"
-```
+You can find all the repository state designations in the `zshrc.sh` file by copying the repository.
 
 ## Install
 
@@ -46,20 +32,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{-%G%}"
     ```
 3.  Restart the console, or write the `zsh` command to start a new session with the applied changes to the `~/.zshrc` settings. 
 4.  Go in a git repository and test it! This only works if you are in a repository.
-
-This functionality of working only in a directory with initialised git is done by using the appropriate division at the end of the `git_super_status` function in the `zshrc.sh` file:
-
-```bash
-# if there is name of branch in current directory.
-# I mean this name is not ":".
-if [ "${STATUS:24:1}" = ":" ]; then
-  echo ""
-else
-  echo "$STATUS"
-fi
-```
-
-The slice that occurs on git status only works on the slice set in the code. Accordingly, you will have to update it if you make any changes to the appearance of the git prompt.
 
 ## Customisation
 
