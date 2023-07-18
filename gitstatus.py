@@ -7,12 +7,15 @@ prehash = ':'
 from subprocess import Popen, PIPE
 
 import sys
-gitsym = Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
-branch, error = gitsym.communicate()
+
+# checking if i am inside git work tree.
+# git rev-parse --is-inside-work-tree
+gitsym = Popen(['git', 'rev-parse', '--is-inside-work-tree'], stdout=PIPE, stderr=PIPE)
+error = gitsym.communicate()[1]
 
 # code 128: git did not exit cleanly (exit code 128).
 # in this case, it means that there is no ".git" directory.
-if (gitsym.returncode == 128): 
+if (gitsym.returncode == 128):
 	gitsym.kill()
 	exit(1)
 
