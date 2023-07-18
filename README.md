@@ -13,7 +13,7 @@ You can find all the repository state designations in the `zshrc.sh` file by cop
 
 ## Install
 
-1.  Clone this repository somewhere on your hard drive.
+1.  Clone this repository to the $HOME directory or some other location (I'll do it in $HOME, and use that as the path in the future).
 2.  Source the file `zshrc.sh` from your `~/.zshrc` config file, and
     configure your prompt. So, somewhere (might be in the end of the file) in `~/.zshrc`, you should have:
 
