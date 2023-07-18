@@ -34,7 +34,7 @@ In order for git prompt for linux to work, the following components must be inst
 
 ## Deletion
 
-To remove the git command prompt, you need to remove the entire zsh-git-kali-prompt directory (where all the prompt scripts are located), and lines in ~/.zshrc that you added there during installation.
+To remove the git command prompt, you need to remove the entire `zsh-git-kali-prompt` directory (where all the prompt scripts are located), and lines in `~/.zshrc` that you added there during installation.
 
 ## Customisation
 
