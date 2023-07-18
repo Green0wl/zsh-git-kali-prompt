@@ -11,6 +11,14 @@ A `zsh` prompt that displays information about the current git repository. In pa
 ## Designations
 You can find all the repository state designations in the `zshrc.sh` file by copying the repository.
 
+## Dependencies
+
+In order for git prompt for linux to work, the following components must be installed on your local machine:
+
+1. [Git](https://git-scm.com/).
+2. [Python 3](https://www.python.org/downloads/). In scripts, references to Python 3 appear as `python3`. If you have `python` installed, create a symbolic or hard-drive link with the `ln` command to `python3`, or simply rename them in the `zshrc.sh` file.
+3. For the git information prompt to work correctly, your **Kali Linux** must use the `zsh` UNIX command shell.
+
 ## Install
 
 1.  Clone this repository to the $HOME directory or some other location (I'll do it in $HOME, and use that as the path in the future).
