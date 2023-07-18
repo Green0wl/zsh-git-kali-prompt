@@ -24,6 +24,10 @@ You can find all the repository state designations in the `zshrc.sh` file by cop
 3.  Restart the console, or write the `zsh` command to start a new session with the applied changes to the `~/.zshrc` settings. 
 4.  Go in a git repository and test it! This only works if you are in a repository.
 
+## Deletion
+
+To remove the git command prompt, you need to remove the entire zsh-git-kali-prompt directory (where all the prompt scripts are located), and lines in ~/.zshrc that you added there during installation.
+
 ## Customisation
 
 - You may redefine the function `git_super_status` (after the `source` statement) to adapt it to your needs (to change the order in which the information is displayed).
