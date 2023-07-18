@@ -7,7 +7,7 @@ prehash = ':'
 from subprocess import Popen, PIPE
 
 import sys
-gitsym = Popen(['git', 'symbolic-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
+gitsym = Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
 branch, error = gitsym.communicate()
 
 # code 128: git did not exit cleanly (exit code 128).
@@ -17,29 +17,35 @@ if (gitsym.returncode == 128):
 	exit(1)
 
 error_string = error.decode('utf-8')
-
 if 'fatal: Not a git repository' in error_string: 
-	gitsym.kill()
-	exit(1)
-
-branch = branch.decode("utf-8").strip()[11:]
+    gitsym.kill()
+    exit(1)
 
 res, err = Popen(['git','diff','--name-status'], stdout=PIPE, stderr=PIPE).communicate()
 err_string = err.decode('utf-8')
 if 'fatal' in err_string: 
-	gitsym.kill()	
-	exit(1)
+        gitsym.kill()   
+        exit(1)
 
-changed_files = [namestat[0] for namestat in res.decode("utf-8").splitlines()]
-staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
-nb_changed = len(changed_files) - changed_files.count('U')
-nb_U = staged_files.count('U')
-nb_staged = len(staged_files) - nb_U
-staged = str(nb_staged)
-conflicts = str(nb_U)
-changed = str(nb_changed)
-nb_untracked = len([0 for status in Popen(['git','status','--porcelain',],stdout=PIPE).communicate()[0].decode("utf-8").splitlines() if status.startswith('??')])
-untracked = str(nb_untracked)
+# get name of current branch
+# git rev-parse --abbrev-ref HEAD
+branch = Popen(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], stdout=PIPE).communicate()[0].decode().strip()
+
+# gets number of staged files
+# git diff --cached --numstat | wc -l
+staged = len(Popen(['git', 'diff', '--cached', '--numstat'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
+
+# gets number of conflicts
+# git --no-pager diff --name-only --diff-filter=U | wc -l 
+conflicts = len(Popen(['git', '--no-pager', 'diff', '--name-only', '--diff-filter=U'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
+
+# gets number of modified files
+# git --no-pager diff --name-only --diff-filter=M | wc -l
+modified = len(Popen(['git', '--no-pager', 'diff', '--name-only', '--diff-filter=M'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
+
+# gets number of untracked files
+# git ls-files --others --exclude-standard | wc -l
+untracked = len(Popen(['git', 'ls-files', '--others', '--exclude-standard'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
 
 ahead, behind = 0,0
 
@@ -65,10 +71,10 @@ out = ' '.join([
 	branch,
 	str(ahead),
 	str(behind),
-	staged,
-	conflicts,
-	changed,
-	untracked,
+	str(staged),
+	str(conflicts),
+	str(modified),
+	str(untracked),
 	])
 print(out, end='')
 
