@@ -19,16 +19,7 @@ You can find all the repository state designations in the `zshrc.sh` file by cop
 
     ```sh
     # zsh git prompt setup.
-    source $HOME/zsh-git-kali-prompt/zshrc.sh
-    prompt_symbol=㉿
-    git_prompt_injection_string='$(git_super_status)'
-
-    # standard twoline linux prompt.
-    # can be found in this script above.
-    # PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
-
-    # injecting git prompt.
-    PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]'$git_prompt_injection_string$'\n%F{%(#.blue.green)}└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+    source $HOME/zsh-git-kali-prompt/git_prompt_injector.sh
     ```
 3.  Restart the console, or write the `zsh` command to start a new session with the applied changes to the `~/.zshrc` settings. 
 4.  Go in a git repository and test it! This only works if you are in a repository.
