@@ -10,17 +10,26 @@ import sys
 gitsym = Popen(['git', 'symbolic-ref', 'HEAD'], stdout=PIPE, stderr=PIPE)
 branch, error = gitsym.communicate()
 
+# code 128: git did not exit cleanly (exit code 128).
+# in this case, it means that there is no ".git" directory.
+if (gitsym.returncode == 128): 
+	gitsym.kill()
+	exit(1)
+
 error_string = error.decode('utf-8')
 
-if 'fatal: Not a git repository' in error_string:
-	sys.exit(0)
+if 'fatal: Not a git repository' in error_string: 
+	gitsym.kill()
+	exit(1)
 
 branch = branch.decode("utf-8").strip()[11:]
 
 res, err = Popen(['git','diff','--name-status'], stdout=PIPE, stderr=PIPE).communicate()
 err_string = err.decode('utf-8')
-if 'fatal' in err_string:
-	sys.exit(0)
+if 'fatal' in err_string: 
+	gitsym.kill()	
+	exit(1)
+
 changed_files = [namestat[0] for namestat in res.decode("utf-8").splitlines()]
 staged_files = [namestat[0] for namestat in Popen(['git','diff', '--staged','--name-status'], stdout=PIPE).communicate()[0].splitlines()]
 nb_changed = len(changed_files) - changed_files.count('U')

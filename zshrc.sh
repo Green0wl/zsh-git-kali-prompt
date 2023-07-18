@@ -89,14 +89,7 @@ git_super_status() {
 	  fi
 
 	  STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-
-	  # if there is name of branch in current directory.
-	  # I mean this name is not ":".
-	  if [ "${STATUS:24:1}" = ":" ]; then
-		echo ""
-	  else
-		echo "$STATUS"
-	  fi
+	  echo "$STATUS"
 	fi
 }
 
