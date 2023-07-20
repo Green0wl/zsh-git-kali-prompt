@@ -58,6 +58,7 @@ function update_current_git_vars() {
 	GIT_CONFLICTS=$__CURRENT_GIT_STATUS[5]
 	GIT_CHANGED=$__CURRENT_GIT_STATUS[6]
 	GIT_UNTRACKED=$__CURRENT_GIT_STATUS[7]
+	GIT_DELETED=$__CURRENT_GIT_STATUS[8]
 }
 
 
@@ -84,7 +85,10 @@ git_super_status() {
 	  if [ "$GIT_UNTRACKED" -ne "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED\e[0m"
 	  fi
-	  if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
+	  if [ "$GIT_DELETED" -ne "0" ]; then
+		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED\e[0m"
+	  fi
+	  if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ]; then
 		  STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
 	  fi
 
@@ -105,3 +109,4 @@ ZSH_THEME_GIT_PROMPT_BEHIND="\e[38;5;202m<"
 ZSH_THEME_GIT_PROMPT_AHEAD="\e[38;5;123m>"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="\e[38;5;197m?"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{-%G%}"
+ZSH_THEME_GIT_PROMPT_DELETED="\e[38;5;139mD"

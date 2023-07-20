@@ -50,6 +50,10 @@ modified = len(Popen(['git', '--no-pager', 'diff', '--name-only', '--diff-filter
 # git ls-files --others --exclude-standard | wc -l
 untracked = len(Popen(['git', 'ls-files', '--others', '--exclude-standard'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
 
+# gets number of deleted files
+# git --no-pager diff --name-only --diff-filter=D | wc -l
+deleted = len(Popen(['git', '--no-pager', 'diff', '--name-only', '--diff-filter=D'], stdout=PIPE).communicate()[0].decode().strip().splitlines())
+
 ahead, behind = 0,0
 
 if not branch: # not on any branch
@@ -78,6 +82,7 @@ out = ' '.join([
 	str(conflicts),
 	str(modified),
 	str(untracked),
+	str(deleted)
 	])
 print(out, end='')
 
