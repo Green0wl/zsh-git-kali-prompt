@@ -1,12 +1,9 @@
 #!/usr/bin/env python
 from __future__ import print_function
+from subprocess import Popen, PIPE
 
 # change this symbol to whatever you prefer
 prehash = ':'
-
-from subprocess import Popen, PIPE
-
-import sys
 
 # checking if i am inside git work tree.
 # git rev-parse --is-inside-work-tree

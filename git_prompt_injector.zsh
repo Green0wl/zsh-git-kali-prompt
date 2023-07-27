@@ -1,6 +1,6 @@
 #!/bin/zsh -i
 
-source $HOME/zsh-git-kali-prompt/zshrc.sh
+source $HOME/zsh-git-kali-prompt/zsh-git-kali-prompt.zsh
 
 git_prompt_injection_string='$(git_super_status)'
 prompt_value=$(echo "$PROMPT")
