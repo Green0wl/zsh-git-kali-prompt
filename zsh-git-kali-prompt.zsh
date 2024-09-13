@@ -5,6 +5,7 @@
 # h: equivalent to dirname
 export __GIT_PROMPT_DIR=${0:A:h}
 
+# Available values: "python3" or "binary"
 export GIT_PROMPT_EXECUTABLE=${GIT_PROMPT_EXECUTABLE:-"python3"}
 
 # Initialize colors.
@@ -46,8 +47,17 @@ function update_current_git_vars() {
     if [[ "$GIT_PROMPT_EXECUTABLE" == "python3" ]]; then
         local gitstatus="$__GIT_PROMPT_DIR/gitstatus.py"
         _GIT_STATUS=`python3 ${gitstatus} 2>/dev/null`
+		elif [[ "$GIT_PROMPT_EXECUTABLE" == "binary" ]]; then
+				local gitstatus="$__GIT_PROMPT_DIR/gitstatus"
+				if [[ -x "$gitstatus" ]]; then
+						_GIT_STATUS=`$gitstatus 2>/dev/null`
+				else
+						echo "Error: gitstatus binary not found or not executable."
+						return
+				fi
     fi
-     __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
+
+	__CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
 	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
 	GIT_AHEAD=$__CURRENT_GIT_STATUS[2]
 	GIT_BEHIND=$__CURRENT_GIT_STATUS[3]
