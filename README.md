@@ -18,6 +18,7 @@ In order for git prompt for Linux to work, the following components must be inst
 1. [Git](https://git-scm.com/).
 2. [Python 3](https://www.python.org/downloads/). In scripts, references to Python 3 appear as `python3`. If you have `python` installed, create a symbolic or hard-drive link with the `ln` command to `python3`, or simply rename them in the `zsh-git-kali-prompt.zsh` file.
 3. For the git information prompt to work correctly, your **Kali Linux** must use the `zsh` UNIX command shell.
+4. GCC (optional). If you are going to use the faster C script compiled to a binary file, you will need `gcc` for the compilation. 
 
 ## Install
 
@@ -34,6 +35,24 @@ In order for git prompt for Linux to work, the following components must be inst
     source $HOME/zsh-git-kali-prompt/zsh-git-kali-prompt.plugin.zsh
     ```
 3.  Restart the console, or write the `zsh` command to start a new session with the applied changes to the `~/.zshrc` settings. 
+4.  Go in a git repository and test it! This only works if you are in a repository.
+
+#### Run the plugin *faster* with the C-lang script (optional)
+
+If you want to reduce delay when reloading the prompt shown in the terminal, you can switch from the python script that collects the git information from the current repository to a binary file coming from a C script. The ulity works the same, it just changes the way of executing the same instructions.
+
+To do this follow the next steps:
+
+1. From the directory where you cloned the repo, compile the C script into a binary file with the next command:
+```sh
+gcc -O2 -o gitstatus gitstatus.c
+```
+
+2. From the shell script `zsh-git-kali-prompt.zsh` replace the env variable `GIT_PROMPT_EXECUTABLE` found in line 9 to `binary`. The line should look like this:
+```sh
+export GIT_PROMPT_EXECUTABLE=${GIT_PROMPT_EXECUTABLE:-"binary"}
+```
+3.  Restart the console so the changes are applied.
 4.  Go in a git repository and test it! This only works if you are in a repository.
 
 ## Deletion
