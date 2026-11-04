@@ -26,14 +26,16 @@ In order for git prompt for Linux to work, the following components must be inst
 1. Use the standard installation methods specific to your plugin under zsh.
 
 ### Edit your `~/.zshrc` file:
-1.  Clone this repository to the $HOME directory or some other location (I'll do it in $HOME, and use that as the path in the future).
+1.  Clone this repository anywhere you like (no need to place it in `$HOME`).
 2.  Source the file `zsh-git-kali-prompt.plugin.zsh` from your `~/.zshrc` config file, and
     configure your prompt. So, somewhere (might be in the end of the file) in `~/.zshrc` (**recommended at the end of the file**), you should have:
 
     ```sh
     # zsh git prompt setup.
-    source $HOME/zsh-git-kali-prompt/zsh-git-kali-prompt.plugin.zsh
+    source /path/to/zsh-git-kali-prompt/zsh-git-kali-prompt.plugin.zsh
     ```
+
+    Replace `/path/to/zsh-git-kali-prompt` with the actual directory where you cloned the repository.
 3.  Restart the console, or write the `zsh` command to start a new session with the applied changes to the `~/.zshrc` settings. 
 4.  Go in a git repository and test it! This only works if you are in a repository.
 
