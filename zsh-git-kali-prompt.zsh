@@ -3,7 +3,7 @@
 # see documentation at http://linux.die.net/man/1/zshexpn
 # A: finds the absolute path, even if this is symlinked
 # h: equivalent to dirname
-export __GIT_PROMPT_DIR=${0:A:h}
+export __GIT_PROMPT_DIR=${${(%):-%N}:A:h}
 
 # Available values: "python3" or "binary"
 export GIT_PROMPT_EXECUTABLE=${GIT_PROMPT_EXECUTABLE:-"python3"}
